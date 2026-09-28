@@ -33,6 +33,31 @@
   }
   .dd-item { font-size: 15px; line-height: 1.6; padding: 4px 0; }
   .dd-item b { color: #c0392b; }
+  .dd-item table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 13px;
+  }
+  .dd-item table th,
+  .dd-item table td {
+    border: 1px solid #ddd;
+    padding: 6px 4px;
+    text-align: center;
+  }
+  .dd-item table th {
+    background: #f0f4fa;
+    font-weight: 600;
+    color: #333;
+  }
+  .dd-item table td:first-child {
+    text-align: left;
+    font-weight: 500;
+  }
+  .dd-item .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   a { color: #2b7de9; text-decoration: none; }
   .img-box { margin-top: 8px; }
   .img-box img {
@@ -86,6 +111,139 @@ const DATA = [
     videos: [
       { title: "B站：甲状腺结节TI-RADS", url: "https://www.bilibili.com/video/BV..." }
     ]
+    },
+   {
+    name: "二尖瓣关闭不全",
+    alias: ["二尖瓣反流", "MR（二尖瓣反流）"],
+    dd: [
+      {
+        name: "诊断要点",
+        points: `
+          <div class="table-wrap">
+          <table>
+            <tr>
+              <th>参数</th>
+              <th>轻度 (1+)</th>
+              <th>中度 (2+)</th>
+              <th>中重度 (3+)</th>
+              <th>重度 (4+)</th>
+            </tr>
+            <tr>
+              <td>缩流颈宽度 (VCW)</td>
+              <td>&lt; 0.3 cm</td>
+              <td>0.3 – 0.7 cm</td>
+              <td>0.3 – 0.7 cm</td>
+              <td><b>≥ 0.7 cm</b></td>
+            </tr>
+            <tr>
+              <td>有效反流口面积 (EROA)</td>
+              <td>&lt; 0.20 cm²</td>
+              <td>0.20 – 0.29 cm²</td>
+              <td>0.30 – 0.39 cm²</td>
+              <td><b>≥ 0.40 cm²</b></td>
+            </tr>
+            <tr>
+              <td>反流容积 (RVol)</td>
+              <td>&lt; 30 mL</td>
+              <td>30 – 44 mL</td>
+              <td>45 – 59 mL</td>
+              <td><b>≥ 60 mL</b></td>
+            </tr>
+            <tr>
+              <td>反流分数 (RF)</td>
+              <td>&lt; 30%</td>
+              <td>30 – 39%</td>
+              <td>40 – 49%</td>
+              <td><b>≥ 50%</b></td>
+            </tr>
+            <tr>
+              <td>肺静脉血流</td>
+              <td>收缩期为主</td>
+              <td>收缩期钝化</td>
+              <td>收缩期反向</td>
+              <td>收缩期反向</td>
+            </tr>
+            <tr>
+              <td>反流束形态</td>
+              <td>细小、中央</td>
+              <td>中等、中央</td>
+              <td>较大、偏心或绕壁</td>
+              <td>巨大、绕壁样</td>
+            </tr>
+          </table>
+          </div>
+          <div style="margin-top:8px;font-size:13px;color:#555;line-height:1.6;">
+            <b>病因分型：</b><br>
+            原发性 MR（二尖瓣反流）：瓣叶增厚、冗长（黏液样变性）、挛缩（风湿）、腱索断裂（连枷样）<br>
+            继发性 MR（二尖瓣反流）：瓣叶对合不良呈“帐篷样”，常继发于左室扩大或室壁运动异常
+          </div>
+        `
+      },
+      {
+        name: "鉴别诊断",
+        points: "主动脉瓣狭窄（AS）：AS（主动脉瓣狭窄）射流在等容收缩期后出现，波形尖锐；MR（二尖瓣反流）为全收缩期圆形波形。二尖瓣脱垂：瓣叶收缩期超过瓣环平面>2mm。腱索断裂：瓣叶连枷样运动，反流束多偏心且严重。"
+      }
+    ],
+    images: [],
+    guidelines: [{ title: "中国成人心脏瓣膜病超声心动图规范化检查专家共识", url: "" }],
+    videos: []
+  },,
+  {
+    name: "主动脉瓣狭窄",
+    alias: ["AS（主动脉瓣狭窄）"],
+    dd: [
+      { name: "诊断要点", points: "轻度Vmax（峰值流速）2.5-2.9m/s、MG（平均跨瓣压差）10-20mmHg；中度Vmax（峰值流速）3-4m/s、MG（平均跨瓣压差）20-40mmHg；重度Vmax（峰值流速）≥4m/s、MG（平均跨瓣压差）≥40mmHg或AVA（主动脉瓣口面积）<1.0cm²。重度AS（主动脉瓣狭窄）的CW（连续波多普勒）呈抛物线形，峰值延迟至收缩中期。低压差低流速AS（主动脉瓣狭窄）需多巴酚丁胺负荷超声鉴别。" },
+      { name: "鉴别诊断", points: "左室流出道梗阻：HOCM（肥厚型梗阻性心肌病）、主动脉瓣下隔膜。HOCM（肥厚型梗阻性心肌病）的CW（连续波多普勒）呈匕首状晚期达峰，常伴SAM（二尖瓣前叶收缩期前向运动）征。瓣上/瓣下狭窄：瓣膜钙化与压差不匹配时需排查。二尖瓣反流（MR）：AS（主动脉瓣狭窄）射流起源于瓣膜水平，MR（二尖瓣反流）起源于二尖瓣口。" }
+    ],
+    images: [],
+guidelines: [
+  { title: "中国成人心脏瓣膜病超声心动图规范化检查专家共识 (2021)", url: "https://drugs.dxy.cn/pc/clinicalGuidelines/vgER1FZgGRpIRg61rBpQcA==" }
+],
+    videos: []
+  },
+  {
+    name: "主动脉瓣关闭不全",
+    alias: ["AR（主动脉瓣反流）", "主动脉瓣反流"],
+    dd: [
+      { name: "诊断要点", points: "重度指标：反流束宽度≥LVOT（左室流出道）直径65%；腹主动脉全舒张期反向血流（特征性）；RVol（反流容积）≥60mL；RF（反流分数）≥50%；缩流颈>6mm。需区分瓣膜本身病变与主动脉根部扩张导致的继发性AR（主动脉瓣反流）。偏心性反流即使目测不大也可能很重。" },
+      { name: "鉴别诊断", points: "二尖瓣反流（MR）：AR（主动脉瓣反流）为舒张期射流，MR（二尖瓣反流）为收缩期射流，关键看时相。肺动脉瓣反流（PR）：AR（主动脉瓣反流）反向血流在腹主动脉最易识别，PR（肺动脉瓣反流）位于右室流出道。" }
+    ],
+    images: [],
+    guidelines: [{ title: "主动脉瓣的超声心动图评估", url: "" }],
+    videos: []
+  },
+  {
+    name: "三尖瓣关闭不全",
+    alias: ["TR（三尖瓣反流）", "三尖瓣反流"],
+    dd: [
+      { name: "诊断要点", points: "重度特征：瓣叶对合不良或连枷样；CW（连续波多普勒）呈浓密、三角形、早期达峰；反流面积≥50%右房；缩流颈>7mm；肝静脉收缩期逆向血流为特征性表现。TAPSE（三尖瓣环收缩期位移）<16mm或三尖瓣环收缩期速度<10cm/s提示右室功能不全。" },
+      { name: "鉴别诊断", points: "功能性TR（三尖瓣反流）最常见，继发于肺动脉高压或左心疾病致右室扩大，瓣膜本身正常；器质性TR（三尖瓣反流）存在瓣膜本身病变（Ebstein畸形、风湿、心内膜炎、起搏器导线损伤）。" }
+    ],
+    images: [],
+    guidelines: [{ title: "三尖瓣反流超声评估浙江省实践应用专家共识", url: "" }],
+    videos: []
+  },
+  {
+    name: "肺动脉瓣狭窄",
+    alias: ["PS（肺动脉瓣狭窄）", "肺动脉狭窄"],
+    dd: [
+      { name: "诊断要点", points: "轻度峰值压差<36mmHg或速度<3m/s；中度压差36-64mmHg或速度3-4m/s；重度压差>64mmHg或速度>4m/s。大部分与先天性心脏病有关（法洛四联症术后等）。超声主要评估近端肺动脉，远端分支需CT（计算机断层扫描）/MRI（磁共振成像）。" },
+      { name: "鉴别诊断", points: "法洛四联症等先心病术后改变：需结合手术史。右室流出道梗阻：需区分瓣膜性、漏斗部（右室流出道肌肉肥厚）和瓣上性梗阻。" }
+    ],
+    images: [],
+    guidelines: [{ title: "默沙东诊疗手册·肺动脉瓣狭窄", url: "" }],
+    videos: []
+  },
+  {
+    name: "老年性心脏瓣膜病",
+    alias: ["退行性瓣膜病", "老年瓣膜病"],
+    dd: [
+      { name: "诊断要点", points: "瓣环钙化（二尖瓣后叶瓣环或主动脉瓣环增厚、钙化），与风湿性交界融合不同。主动脉瓣钙化最常见，常无交界融合。黏液样变性常见，导致瓣膜脱垂，二尖瓣脱垂最多见。" },
+      { name: "鉴别诊断", points: "风湿性瓣膜病：退行性变以瓣环钙化为主，交界不融合；风湿性以交界处融合为特征。先天性二叶式主动脉瓣：短轴切面舒张期呈奔驰车标状闭合线。" }
+    ],
+    images: [],
+    guidelines: [{ title: "超声医学（第7版）", url: "" }],
+    videos: []
   }
 ];
 // =====================================
@@ -108,7 +266,12 @@ function render(list) {
       ${d.alias && d.alias.length ? `<div class="alias">别名：${d.alias.join('、')}</div>` : ''}
 
       <div class="section-title">鉴别诊断</div>
-      ${d.dd.map(x => `<div class="dd-item"><b>${x.name}</b>：${x.points}</div>`).join('')}
+${d.dd.map(x => `
+  <div class="dd-item">
+    <b>${x.name}</b>：${x.points.includes('<table') ? '' : x.points}
+    ${x.points.includes('<table') ? x.points : ''}
+  </div>
+`).join('')}
 
       ${d.images && d.images.length ? `
         <div class="section-title">图片</div>
