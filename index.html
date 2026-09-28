@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>超声速查</title>
+<style>
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0; padding: 16px;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f6f8; color: #1a1a1a;
+  }
+  h1 { font-size: 20px; margin: 0 0 12px; }
+  #search {
+    width: 100%; padding: 14px 16px; font-size: 16px;
+    border: 1px solid #ddd; border-radius: 12px;
+    background: #fff; outline: none;
+  }
+  #search:focus { border-color: #2b7de9; }
+  .card {
+    background: #fff; border-radius: 12px;
+    padding: 14px 16px; margin-top: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .name { font-size: 17px; font-weight: 600; color: #2b7de9; }
+  .alias { font-size: 13px; color: #888; margin-top: 2px; }
+  .section-title {
+    font-size: 14px; font-weight: 600;
+    margin: 14px 0 6px; color: #333;
+    border-left: 3px solid #2b7de9; padding-left: 8px;
+  }
+  .dd-item { font-size: 15px; line-height: 1.6; padding: 4px 0; }
+  .dd-item b { color: #c0392b; }
+  a { color: #2b7de9; text-decoration: none; }
+  .img-box { margin-top: 8px; }
+  .img-box img {
+    width: 100%; border-radius: 8px; display: block; margin-bottom: 8px;
+  }
+  .link-item { font-size: 15px; line-height: 1.8; }
+  .empty { text-align: center; color: #999; margin-top: 40px; font-size: 15px; }
+</style>
+</head>
+<body>
+<h1>🔍 超声速查</h1>
+<input id="search" placeholder="输入病名，如：卵巢肿瘤" autocomplete="off">
+<div id="result"></div>
+<div id="empty" class="empty">输入病名开始搜索</div>
+
+<script>
+// ========== 在这里填你的数据 ==========
+const DATA = [
+  {
+    name: "卵巢肿瘤",
+    alias: ["卵巢肿块", "附件区包块"],
+    dd: [
+      { name: "子宫内膜异位囊肿", points: "磨玻璃样回声，无血流，壁厚" },
+      { name: "畸胎瘤", points: "脂质成分，强回声，伴声影" },
+      { name: "浆液性囊腺瘤", points: "单房，薄壁，无分隔" }
+    ],
+    images: [
+      "卵巢肿瘤1.jpg",
+      "卵巢肿瘤2.jpg"
+    ],
+    guidelines: [
+      { title: "卵巢肿瘤超声指南 2023", url: "https://example.com" }
+    ],
+    videos: [
+      { title: "B站：卵巢肿瘤超声诊断", url: "https://www.bilibili.com/video/BV..." }
+    ]
+  },
+  {
+    name: "甲状腺结节",
+    alias: ["甲状腺肿物"],
+    dd: [
+      { name: "结节性甲状腺肿", points: "多发，海绵样，边界清" },
+      { name: "甲状腺癌", points: "低回声，微钙化，纵横比>1" }
+    ],
+    images: [
+      "甲状腺结节1.jpg"
+    ],
+    guidelines: [
+      { title: "甲状腺结节超声指南", url: "https://example.com" }
+    ],
+    videos: [
+      { title: "B站：甲状腺结节TI-RADS", url: "https://www.bilibili.com/video/BV..." }
+    ]
+  }
+];
+// =====================================
+
+const $search = document.getElementById('search');
+const $result = document.getElementById('result');
+const $empty = document.getElementById('empty');
+
+function render(list) {
+  if (!list.length) {
+    $result.innerHTML = '';
+    $empty.style.display = 'block';
+    $empty.textContent = '没找到，试试别的病名';
+    return;
+  }
+  $empty.style.display = 'none';
+  $result.innerHTML = list.map(d => `
+    <div class="card">
+      <div class="name">${d.name}</div>
+      ${d.alias && d.alias.length ? `<div class="alias">别名：${d.alias.join('、')}</div>` : ''}
+
+      <div class="section-title">鉴别诊断</div>
+      ${d.dd.map(x => `<div class="dd-item"><b>${x.name}</b>：${x.points}</div>`).join('')}
+
+      ${d.images && d.images.length ? `
+        <div class="section-title">图片</div>
+        <div class="img-box">
+          ${d.images.map(img => `<img src="${img}" alt="${d.name}">`).join('')}
+        </div>
+      ` : ''}
+
+      ${d.guidelines && d.guidelines.length ? `
+        <div class="section-title">指南</div>
+        ${d.guidelines.map(g => `<div class="link-item">📄 <a href="${g.url}" target="_blank">${g.title}</a></div>`).join('')}
+      ` : ''}
+
+      ${d.videos && d.videos.length ? `
+        <div class="section-title">视频链接</div>
+        ${d.videos.map(v => `<div class="link-item">🎬 <a href="${v.url}" target="_blank">${v.title}</a></div>`).join('')}
+      ` : ''}
+    </div>
+  `).join('');
+}
+
+$search.addEventListener('input', () => {
+  const q = $search.value.trim().toLowerCase();
+  if (!q) {
+    $result.innerHTML = '';
+    $empty.style.display = 'block';
+    $empty.textContent = '输入病名开始搜索';
+    return;
+  }
+  const list = DATA.filter(d =>
+    d.name.toLowerCase().includes(q) ||
+    (d.alias || []).some(a => a.toLowerCase().includes(q))
+  );
+  render(list);
+});
+</script>
+</body>
+</html>
